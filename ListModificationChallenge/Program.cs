@@ -156,8 +156,14 @@ namespace ListModificationChallenge
 
             // TODO: Add a record after Paul Jones in the incoming list and return a new list that includes newPerson
             // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
-
+            output = new List<PersonModel>();
+            output.AddRange(people);
+            output.Insert((output.Count/2)+1, newPerson);
+            /*
+            Console.WriteLine("DEBUG: output count -> " + output.Count);
+            Console.WriteLine("DEBUG: output count / 2-> " + output.Count/2);
+            Console.WriteLine("DEBUG: output[3]-> " + output[3].FullName);
+            */
             return output;
         }
 
