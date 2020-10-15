@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ListModificationChallenge
 {
@@ -173,7 +174,7 @@ namespace ListModificationChallenge
 
             // TODO: Sort the incoming list values by fullname (ascending) and return a new list
             // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
+            output = people.OrderBy(x => x.FullName).ToList();
 
             return output;
         }
