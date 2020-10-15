@@ -202,7 +202,7 @@ namespace ListModificationChallenge
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
 
             // TODO: Add a record after Paul Jones in the incoming list
-            
+            people.Insert((people.Count / 2) + 1, newPerson);
         }
 
         private static void SortAList(List<PersonModel> people)
