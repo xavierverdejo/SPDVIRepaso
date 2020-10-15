@@ -186,7 +186,7 @@ namespace ListModificationChallenge
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
 
             // TODO: Add a record to the end of the incoming list
-            
+            people.Add(newPerson);
         }
 
         private static void InsertRecordFirstIntoList(List<PersonModel> people)
