@@ -194,7 +194,7 @@ namespace ListModificationChallenge
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
 
             // TODO: Add a record to the beginning of the incoming list
-            
+            people.Insert(0, newPerson);
         }
 
         private static void InsertRecordInTheMiddleOfTheList(List<PersonModel> people)
