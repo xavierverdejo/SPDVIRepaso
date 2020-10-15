@@ -207,12 +207,11 @@ namespace ListModificationChallenge
 
         private static void SortAList(List<PersonModel> people)
         {
-            List < PersonModel > tList = new List<PersonModel>();
+
             // TODO: Sort the incoming list values by fullname (ascending)
-            tList = people.OrderBy(x => x.FullName).ToList();
-            people.Clear();
-            people.AddRange(tList);
-            Console.WriteLine("DEBUG: " + people[1].LastName);
+            people.Sort((x, y) => string.Compare(x.FullName, y.FullName));
+            
+            //Console.WriteLine("DEBUG: " + people[1].LastName);
         }
         #endregion
 
