@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,14 +33,25 @@ namespace TextFileChallenge
             using (TextFieldParser parser = new TextFieldParser(path))
             {
                 parser.TextFieldType = FieldType.Delimited;
-                MessageBox.Show(parser.ReadLine());
+                //MessageBox.Show(parser.ReadLine());
+                string firstLine = parser.ReadLine();
+                string[] firstFields = firstLine.Split(',');
+
                 while (!parser.EndOfData)
                 {
                     string line = parser.ReadLine();
                     string[] fields = line.Split(',');
-                    people.Add(new PersonModel(fields[0], fields[1], Convert.ToInt32(fields[2]), Convert.ToBoolean(Convert.ToInt32(fields[3]))));
+                    var personByValues = new Dictionary<string, string>();
+                    personByValues.Add(firstFields[0], fields[0]);
+                    personByValues.Add(firstFields[1], fields[1]);
+                    personByValues.Add(firstFields[2], fields[2]);
+                    personByValues.Add(firstFields[3], fields[3]);
+                    dynamic person = CreateInstance(personByValues);
+                    people.Add(new PersonModel(person.FirstName, person.LastName, Convert.ToInt32(person.Age), Convert.ToBoolean(Convert.ToInt32(person.IsAlive))));
+                    
                 }
             }
+            
         }
         public void updateCSV()
         {
@@ -78,6 +90,21 @@ namespace TextFileChallenge
         private void button2_Click(object sender, EventArgs e)
         {
             updateCSV();
+        }
+
+        //WITH THIS FUNCTION WE CAN CREATE AN INSTANCE OF A CLASS WITH A DICTIONARY
+        public static dynamic CreateInstance(Dictionary<string, string> objectFromFile)
+        {
+            dynamic instance = new ExpandoObject();
+
+            var instanceDict = (IDictionary<string, object>)instance;
+
+            foreach (var pair in objectFromFile)
+            {
+                instanceDict.Add(pair.Key, pair.Value);
+            }
+
+            return instance;
         }
     }
 }
